@@ -22,6 +22,8 @@ zip -X -q release.zip \
     kick-support.js \
     twitch-content.js \
     twitch-styles.css \
+    youtube-embed.js \
+    youtube-embed.css \
     icons/icon16.png \
     icons/icon48.png \
     icons/icon128.png \

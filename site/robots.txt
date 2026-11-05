@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://youtube-player-for-twitch.vrnrn.com/sitemap.xml

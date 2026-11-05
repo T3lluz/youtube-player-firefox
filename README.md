@@ -2,94 +2,68 @@
   <img src="icons/icon128.png" alt="" width="80" height="80">
 </p>
 
-<h1 align="center">YouTube Player for Twitch</h1>
+<h1 align="center">YouTube Player for Twitch, for Firefox</h1>
 
 <p align="center">
-  Watch YouTube livestreams inside Twitch, with Twitch chat alongside.
+  Watch YouTube livestreams inside Twitch, with Twitch chat alongside and only the player controls on the video.
 </p>
 
 <p align="center">
-  <a href="https://chromewebstore.google.com/detail/youtube-player-for-twitch/pkhipedofkjfffichjllpmoajlfndpad"><img src="https://img.shields.io/badge/Install_for_Chrome-4285F4?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="Install from the Chrome Web Store"></a>
-  <a href="https://github.com/vrnrn/youtube-player-for-twitch/actions/workflows/chrome-web-store.yml"><img src="https://img.shields.io/github/actions/workflow/status/vrnrn/youtube-player-for-twitch/chrome-web-store.yml?branch=main&amp;label=build&amp;logo=github&amp;logoColor=white" alt="Extension build status"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-a78bfa?style=flat" alt="MIT license"></a>
-</p>
-
-<p align="center">
-  <a href="#get-started">Get started</a> ·
+  <a href="https://t3lluz.github.io/youtube-player-firefox/">Install</a> ·
   <a href="#features">Features</a> ·
   <a href="docs/usage.md">Usage guide</a> ·
-  <a href="docs/development.md">Development</a> ·
-  <a href="https://youtube-player-for-twitch.vrnrn.com/privacy/">Privacy</a>
+  <a href="docs/development.md">Development</a>
 </p>
 
 ---
 
-When a streamer is live on both platforms, you can watch their YouTube feed without leaving their Twitch community. Find the stream automatically or paste a YouTube link, then keep using Twitch chat, badges and channel points from the same page.
+This is the Firefox build of [vrnrn's YouTube Player for Twitch](https://github.com/vrnrn/youtube-player-for-twitch), which is a Chrome extension. It keeps every feature and changes one thing: the YouTube player shows only its controls.
+
+| Shown | Hidden |
+| :--- | :--- |
+| Play and pause, volume, captions, settings, scrub bar, time, fullscreen | Share, watch later, More videos, the YouTube logo, video title and channel, suggested videos |
+
+YouTube's embed has no setting for this, so `youtube-embed.css` hides those parts of the player. It applies only to the iframe this extension creates. YouTube embeds on other sites look the same as before. If YouTube renames its player elements, something hidden may reappear until the file is updated.
 
 ## Get started
 
-1. **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/youtube-player-for-twitch/pkhipedofkjfffichjllpmoajlfndpad).**
+1. **[Add it to Firefox](https://t3lluz.github.io/youtube-player-firefox/).** It needs Firefox 140 or newer, or a browser built on it like Zen. Mozilla signs it and it updates itself.
 2. **Open a Twitch channel** and click **YPFT** on the right of the top navigation.
 3. **Find your stream.** Choose **Find YouTube Stream → Use This Stream**, or paste a YouTube URL and click **Go**.
 
 The extension pauses and mutes the underlying Twitch player. **Restore Twitch** brings it back with its original pause, mute and volume settings.
 
-> Prefer to run the source? Follow the [unpacked installation guide](docs/development.md#load-the-extension-locally). Chrome 102 or newer is required.
-
 ## Features
 
 | Watch and chat | Find and customize |
 | :--- | :--- |
-| **YouTube playback, Twitch community**<br>Watch through YouTube's embedded player while keeping the Twitch channel interface. Playback quality depends on the source stream and YouTube's available options. | **Find the live stream**<br>Checks the streamer's linked YouTube channel first, then searches by Twitch channel name with fuzzy matching and live-result filtering. |
-| **Catch up to live**<br>Use **Sync Now** to seek toward the live edge and briefly catch up at 2× speed. Optional **Auto-sync** repeats every 10 minutes. | **Recent streams and favorites**<br>Restore playback after a reload, remember links per Twitch channel, revisit your last five streams and pin favorites. |
-| **Floating chat in fullscreen**<br>Optional floating chat mirrors Twitch messages, badges and emotes over the player. Move it, resize it and adjust its appearance. | **Player settings**<br>Keep Twitch at Source quality, hide native Twitch player-extension overlays, and adjust extra controls in a dedicated settings window. |
+| **YouTube playback, Twitch community**<br>Watch through YouTube's embedded player while keeping the Twitch channel interface. | **Find the live stream**<br>Checks the streamer's linked YouTube channel first, then searches by Twitch channel name with fuzzy matching and live-result filtering. |
+| **Catch up to live**<br>**Sync Now** seeks toward the live edge and briefly catches up at 2× speed. Optional **Auto-sync** repeats every 10 minutes. | **Recent streams and favorites**<br>Restore playback after a reload, remember links per Twitch channel, revisit your last five streams and pin favorites. |
+| **Floating chat in fullscreen**<br>Optional read-only chat over the player, with Twitch messages, badges and emotes. Move it, resize it and adjust its appearance. | **Player settings**<br>Keep Twitch at Source quality, hide Twitch player-extension overlays, and adjust extra controls in a settings window. |
 
-**Extra emotes** from BetterTTV, FrankerFaceZ and 7TV appear in Twitch chat and floating chat by default, including animated emotes and the current channel's sets. **Channels and categories** default to viewer count, highest first; you can still choose another sort.
+**Extra emotes** from BetterTTV, FrankerFaceZ and 7TV appear in Twitch chat and floating chat. **Channels and categories** default to viewer count, highest first. **Theatre Mode** widens the player using Twitch's layout controls.
 
-**Theatre Mode** widens the player using Twitch’s layout controls. It keeps YouTube playing; **Exit Theatre Mode** restores the standard layout.
+**Kick support (experimental)** is off by default under **Settings → Kick**. [Setup and limits](docs/usage.md#experimental-kick-support).
 
-Floating chat is **read-only** and starts off by default. It works when Twitch chat starts collapsed: the extension initializes the native feed and restores the collapsed sidebar. Open normal Twitch chat to send messages and access moderation controls. [Explore chat and player settings →](docs/usage.md#floating-chat)
+**Interruption blocking (experimental)** is off by default. It bundles the pinned TwitchAdSolutions VAFT v37.0.0 script, runs only on Twitch, and reloads the page when toggled. Turn off any other VAFT install first. [Setup and limits](docs/usage.md#experimental-interruption-blocking), [source notes](vendor/vaft/README.md).
 
-**Kick support (Experimental)** is off by default under **Settings → Kick**. Enable it to substitute a Kick channel URL for the Twitch player, or pin Kick channels alongside Twitch's Followed Channels. Only live Kick pins appear in the sidebar, checked every 10 minutes. Pins open a local channel view with Kick playback and chat, including channels without a Twitch account. [Kick setup and limitations →](docs/usage.md#experimental-kick-support)
+## Privacy
 
-<details>
-<summary><strong>Experimental: Twitch interruption blocking</strong></summary>
+Settings, history and playback state stay in the browser's local extension storage. There is no analytics or telemetry. The extension sends Twitch channel names to YouTube when you search, channel names and IDs to BetterTTV, FrankerFaceZ and 7TV for emotes, and Kick channel names to Kick if you turn that on. YouTube and Twitch handle their own requests.
 
-The optional **Interruption blocking** setting bundles the pinned TwitchAdSolutions VAFT v37.0.0 algorithm. It is **off by default**, runs only on Twitch, and reloads the page when toggled. Disable any other VAFT installation before enabling it.
+## Build
 
-Its effectiveness depends on Twitch, and alternate playlists can temporarily reduce quality. Actual interruption efficacy, real HEVC fallback and Chrome Web Store acceptance of this integration remain unverified. YouTube playback keeps its own behavior.
-
-Read the [setup and limitations](docs/usage.md#experimental-interruption-blocking), [source and adapter notes](vendor/vaft/README.md), and [verification checklist](docs/vaft-qa.md).
-
-</details>
-
-## A few things to know
-
-- **Use the matching stream.** Automatic search can suggest an approximate channel match; check the title and channel before selecting it. You can always paste a link yourself.
-- **Sync is a catch-up control.** It seeks toward YouTube's live edge; it does not guarantee that video and Twitch messages arrive at exactly the same time.
-- **Your preferences stay on your device.** Settings, history and playback state use Chrome's local extension storage. The extension has no developer analytics or telemetry; YouTube and Twitch handle their own requests. [Read the privacy policy](https://youtube-player-for-twitch.vrnrn.com/privacy/).
-
-## Build, explore, contribute
-
-Vanilla JavaScript, CSS and Manifest V3. No framework or npm dependencies are needed for the extension's tests and build.
+Vanilla JavaScript, CSS and Manifest V3, with no npm dependencies. Node 22, `zip` and `unzip` are the only requirements.
 
 ```bash
-git clone https://github.com/vrnrn/youtube-player-for-twitch.git
-cd youtube-player-for-twitch
+git clone https://github.com/T3lluz/youtube-player-firefox.git
+cd youtube-player-firefox
 npm run check
 npm run build
 ```
 
-The build replaces `release.zip` and refreshes the unpacked dev extension at the fixed path `build/latest`, with runtime files and license notices only. Only the latest build is kept; `build/` is cleared on each build. See the [development guide](docs/development.md) for local installation, the source map, verification notes and the release workflow.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for changes and bug reports. Found a bug or have an idea? [Open an issue](https://github.com/vrnrn/youtube-player-for-twitch/issues). For playback or chat problems, include your Chrome version and steps to reproduce the issue.
+Load `build/latest/manifest.json` from `about:debugging`. The [development guide](docs/development.md) covers the source map, testing and releases. To pull upstream changes, add `https://github.com/vrnrn/youtube-player-for-twitch` as a remote and merge its `main`.
 
 ---
 
-[MIT licensed](LICENSE). Bundled VAFT retains the [TwitchAdSolutions Contributors' MIT license](vendor/vaft/LICENSE). Floating chat was inspired by [Floating Twitch Chat](https://github.com/xD33m/floating_twitch_chat), with an original implementation for this extension.
-
-<p align="center">
-  <a href="https://youtube-player-for-twitch.vrnrn.com/">Website</a> ·
-  <a href="https://github.com/vrnrn/youtube-player-for-twitch/releases">Releases</a> ·
-  <a href="https://youtube-player-for-twitch.vrnrn.com/privacy/">Privacy policy</a>
-</p>
+[MIT licensed](LICENSE), from vrnrn's original. Bundled VAFT keeps the [TwitchAdSolutions Contributors' MIT license](vendor/vaft/LICENSE). Floating chat was inspired by [Floating Twitch Chat](https://github.com/xD33m/floating_twitch_chat).

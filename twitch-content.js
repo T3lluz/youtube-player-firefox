@@ -820,7 +820,7 @@
         const iframe = document.createElement('iframe');
         iframe.id = 'ytot-youtube-player';
         iframe.title = 'YouTube video player';
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&ypft_controls=1`;
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
         iframe.setAttribute('allowfullscreen', 'true');
 

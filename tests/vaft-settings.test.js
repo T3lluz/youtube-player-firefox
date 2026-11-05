@@ -112,6 +112,13 @@ test('storage changes reconcile and nonboolean stored values stay off', async ()
     await f.events.change({ [key]: { newValue: 'true' } }, 'local');
     assert.equal(f.registration, null);
 });
+test('settings commands accept Firefox senders, which can omit frameId and tab', async () => {
+    const f = fixture();
+    const response = await f.send({ type: 'GET_VAFT_SETTINGS' }, { id: 'ypft', url: 'https://www.twitch.tv/channel' });
+    assert.equal(response.error, undefined);
+    assert.equal(response.enabled, false);
+});
+
 test('settings commands reject page/extension/iframe senders and malformed values', async () => {
     const f = fixture();
     await get(f);

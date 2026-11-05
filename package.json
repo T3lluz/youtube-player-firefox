@@ -1,15 +1,15 @@
 {
-  "name": "youtube-player-for-twitch",
+  "name": "youtube-player-firefox",
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "check": "npm run check:syntax && npm test && npm run check:site",
+    "check": "npm run check:syntax && npm test",
     "check:syntax": "node scripts/check-syntax.mjs",
     "test": "node --test",
     "profile:memory": "node --expose-gc scripts/profile-memory.mjs",
-    "check:site": "node scripts/check-site.mjs",
     "build": "sh scripts/build-release.sh",
-    "version:site": "node scripts/version-site.mjs"
+    "lint:firefox": "npx --yes web-ext@10 lint --source-dir build/latest --self-hosted",
+    "sign:firefox": "node scripts/sign-firefox.mjs"
   },
   "engines": {
     "node": ">=22"

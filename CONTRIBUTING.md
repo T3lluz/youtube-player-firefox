@@ -13,4 +13,4 @@ Keep changes focused. Include reproduction steps for a fix and a screenshot for 
 
 Edit the VAFT adapter in `scripts/prepare-vaft.mjs`, then regenerate it; do not hand-edit the generated bundle or the pinned upstream source. Keep its license notices intact.
 
-Bug reports should include the Chrome and extension versions, steps to reproduce, expected and actual behavior, and relevant optional settings. Omit cookies, tokens, and private chat content from logs.
+Bug reports should include the Firefox and extension versions, steps to reproduce, expected and actual behavior, and relevant optional settings. Omit cookies, tokens, and private chat content from logs.

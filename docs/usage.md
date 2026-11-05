@@ -95,12 +95,12 @@ The extension bundles the pinned TwitchAdSolutions VAFT v37.0.0 algorithm. It fi
 
 If you use another VAFT installation, disable that individual script before enabling this option, then reload Twitch. Leave unrelated scripts and extensions enabled. The integrated version skips an already-detected VAFT or Worker wrapper.
 
-The feature uses `scripting` permission and `https://www.twitch.tv/*` host access for persistent MAIN-world registration at `document_start`. It adds no all-sites access, media-host privileges, telemetry or remote updater. Chrome 102 or newer is required.
+The feature uses `scripting` permission and `https://www.twitch.tv/*` host access for persistent MAIN-world registration at `document_start`. It adds no all-sites access, media-host privileges, telemetry or remote updater. Firefox 140 or newer is required.
 
 Worker startup and YouTube coordination were checked in the integrated browser. Actual interruption efficacy, real HEVC fallback and Chrome Web Store acceptance remain unverified. VAFT dynamically evaluates Twitch's player-worker source in a Blob worker; alternate playlists can temporarily reduce quality. See the [source and adapter notes](../vendor/vaft/README.md) and [verification checklist](vaft-qa.md).
 
 ## Storage and privacy
 
-Settings, recent history, pinned streams and per-channel playback state are stored on your device in Chrome's extension-local storage. You can clear recent history from the menu; removing the extension clears its local storage.
+Settings, recent history, pinned streams and per-channel playback state are stored on your device in the browser's extension-local storage. You can clear recent history from the menu; removing the extension clears its local storage.
 
 Search and playback requests go from your browser to YouTube and Twitch. When extra emotes are enabled, public catalogs and images load directly from BetterTTV, FrankerFaceZ and 7TV, and Twitch can resolve a public channel ID when needed. The extension has no developer analytics, telemetry service or developer-operated request proxy. Those platforms process their own requests under their own policies. See the full [privacy policy](https://youtube-player-for-twitch.vrnrn.com/privacy/).

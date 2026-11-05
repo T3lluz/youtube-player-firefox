@@ -1,0 +1,23 @@
+/*
+ * Keeps YouTube's player controls (play, volume, captions, settings, scrub bar,
+ * time, fullscreen) and hides the rest. No embed parameter can do this:
+ * `controls` is all or nothing and `rel` no longer turns off suggestions.
+ */
+
+/* Video title and channel. */
+html[data-ypft-controls] .ytwPlayerTopControlsTitleWrapper,
+/* Share, watch later, "More videos", the YouTube logo and the suggestions grid. */
+html[data-ypft-controls] player-fullscreen-controls,
+/* Suggestions, promos, tips and the logo drawn over the video. */
+html[data-ypft-controls] player-user-edu-tooltip,
+html[data-ypft-controls] .ytp-pause-overlay,
+html[data-ypft-controls] .ytp-timely-actions-content,
+html[data-ypft-controls] .ytp-watermark {
+    display: none !important;
+}
+
+/* YouTube leaves a row free for those buttons. Move the controls down into it. */
+html[data-ypft-controls] .player-controls-bottom,
+html[data-ypft-controls] yt-progress-bar {
+    transform: translateY(48px);
+}

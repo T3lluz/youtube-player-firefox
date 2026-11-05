@@ -136,7 +136,7 @@ test('YouTube injection uses untouched iframe URL/API and a body portal; restore
     const f = fixture();
     f.api.injectYouTube('abcdefghijk', { title: 'Fixture', channel: 'Fixture' });
     const iframe = f.elements.get('ytot-youtube-player');
-    assert.equal(iframe.src, 'https://www.youtube.com/embed/abcdefghijk?autoplay=1&rel=0&enablejsapi=1');
+    assert.equal(iframe.src, 'https://www.youtube.com/embed/abcdefghijk?autoplay=1&rel=0&enablejsapi=1&ypft_controls=1');
     assert.match(iframe.allow, /fullscreen/);
     const wrapper = f.elements.get('ytot-youtube-wrapper');
     assert.equal(f.document.body.children[0], wrapper);

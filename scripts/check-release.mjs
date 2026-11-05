@@ -9,7 +9,7 @@ const unpackedDirectory = process.argv[2] && resolve(cwd, process.argv[2]);
 const manifest = JSON.parse(readFileSync(new URL('../manifest.json', import.meta.url), 'utf8'));
 const entries = execFileSync('unzip', ['-Z1', 'release.zip'], { cwd, encoding: 'utf8' }).trim().split('\n');
 const expected = new Set([
-    'manifest.json', manifest.background.service_worker,
+    'manifest.json', ...manifest.background.scripts,
     ...Object.values(manifest.icons),
     ...manifest.content_scripts.flatMap(script => [...(script.js || []), ...(script.css || [])]),
     'vaft-main.js', 'vendor/vaft/vaft.js', 'vendor/vaft/LICENSE', 'vendor/vaft/README.md', 'LICENSE'

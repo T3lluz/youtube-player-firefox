@@ -2,8 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Player for Twitch",
   "version": "1.4.0",
-  "minimum_chrome_version": "102",
-  "description": "Watch YouTube livestreams inside Twitch with stream discovery, live sync, and optional floating chat.",
+  "description": "Watch YouTube livestreams inside Twitch with only the player controls, stream discovery, live sync, and optional floating chat.",
   "permissions": [
     "storage",
     "scripting"
@@ -18,7 +17,9 @@
     "https://7tv.io/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "scripts": [
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
@@ -37,11 +38,36 @@
         "twitch-styles.css"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/embed/*"
+      ],
+      "js": [
+        "youtube-embed.js"
+      ],
+      "css": [
+        "youtube-embed.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-player-for-twitch@t3lluz.com",
+      "strict_min_version": "140.0",
+      "update_url": "https://t3lluz.github.io/youtube-player-firefox/updates.json",
+      "data_collection_permissions": {
+        "required": [
+          "websiteContent"
+        ]
+      }
+    }
   }
 }

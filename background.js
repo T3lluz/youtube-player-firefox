@@ -7,7 +7,7 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request?.type === 'GET_KICK_CHANNEL') {
         const url = sender.url || sender.tab?.url;
-        if (sender.id !== chrome.runtime.id || sender.frameId !== 0 || !/^https:\/\/www\.twitch\.tv\//.test(url || '')) {
+        if (sender.id !== chrome.runtime.id || sender.frameId > 0 || !/^https:\/\/www\.twitch\.tv\//.test(url || '')) {
             sendResponse({ error: 'Kick channels are only available on Twitch.' });
             return;
         }
@@ -519,7 +519,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (!['GET_VAFT_SETTINGS', 'SET_VAFT_SETTINGS'].includes(request?.type)) return;
     // No page-message bridge, fetch proxy, external messages, or iframe controls.
     const url = sender.url || sender.tab?.url;
-    if (sender.id !== chrome.runtime.id || sender.frameId !== 0 ||
+    if (sender.id !== chrome.runtime.id || sender.frameId > 0 ||
         !/^https:\/\/www\.twitch\.tv\//.test(url || '')) {
         sendResponse({ error: 'VAFT settings are only available on Twitch.' });
         return;

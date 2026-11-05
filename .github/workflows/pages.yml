@@ -1,0 +1,52 @@
+# Every push to main: test, build, get the build signed by addons.mozilla.org
+# (unlisted) and publish the install page, the signed .xpi and updates.json to
+# https://t3lluz.github.io/youtube-player-firefox/
+#
+# Setup: Settings > Pages > Source: GitHub Actions, plus the secrets
+# AMO_JWT_ISSUER and AMO_JWT_SECRET from
+# https://addons.mozilla.org/developers/addon/api/key/
+name: Sign and publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check
+      - run: npm run build
+      - run: npm run lint:firefox
+      - name: Sign on AMO
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: npm run sign:firefox
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

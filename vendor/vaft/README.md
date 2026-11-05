@@ -3,7 +3,7 @@
 YPFT's optional, experimental **interruption blocking** feature uses TwitchAdSolutions VAFT to
 filter Twitch advertising segments and obtain alternate Twitch playback tokens
 and playlists. It is off by default. The label does not change what the feature
-executes or imply Chrome Web Store approval.
+executes.
 
 ## Provenance and license
 
@@ -24,8 +24,7 @@ original userscript metadata (including its update/download URLs) is not package
 ## Adapter changes
 
 The script runs only in the top frame of `https://www.twitch.tv/*`, registered
-persistently in Chrome's MAIN world at `document_start` while enabled. Chrome
-102 or newer is required for the registered script's execution-world selection.
+persistently in the page's MAIN world at `document_start` while enabled.
 The settings service worker reconciles registration on install, update, startup,
 storage changes and settings reads. It serializes writes and rolls registration
 back if persistence fails. Turning either direction on this tab reloads Twitch;
